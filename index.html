@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sabrina Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html" class="navbar-link">
+        <h1>Sabrina Mohammed</h1>
+        </a>
+      </div>
+
+
+      <nav class="navbar">
+      <a href="about.html">About</a>
+      <a href="work.html">Work</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Intro Section -->
+    <section class="intro">
+      <img src="psticker.webp" alt="Sabrina Photo" class="photo">
+      <p class="bio">
+        Hi! I am Sabrina – a curious creator and problem-solver passionate about blending design and cloud technology to craft meaningful, user-centered solutions.
+      </p>
+    </section>
+
+    <!-- Leadership and Activities -->
+    <section>
+      <h2>Leadership and Activities</h2>
+      
+      <div class="grid">
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front aiga-bg">America Institute of Graphic Arts</div>
+            <div class="flip-back">Collaborated with design professionals to explore creative trends, sharpen visual storytelling skills, and contribute to community-centered projects.</div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front adobe-bg">Adobe Creative Skills Academy</div>
+            <div class="flip-back">Explored modern design techniques and branding strategies while leveraging Adobe tools and AI-powered features to create impactful visual content and enhance creative workflows.</div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front codepath-bg">CodePath</div>
+            <div class="flip-back">Currently participating in the Cybersecurity Fellowship, gaining hands-on experience in system security, ethical hacking, and real-world threat analysis.</div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front colorstack-bg">Color Stack</div>
+            <div class="flip-back">As Technical & Creative Director at MSU, led the design and development of the chapter website, established cohesive branding, and created visual assets to elevate the organization’s presence and outreach.</div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front nsbe-bg">National Society of Black Engineers</div>
+            <div class="flip-back">Represented chapter members as Senator; led initiatives to strengthen outreach, increase engagement, and connect students with STEM opportunities.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <h2>Technical Skills</h2>
+
+      <div class="skill-block">
+        <p><strong>Languages</strong></p>
+        <div class="bar">
+          <span>Python, SQL, JavaScript, R, HTML/CSS, Bash, Powershell</span>
+          <div class="percent"></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <p><strong>Frameworks</strong></p>
+        <div class="bar">
+          <span>React, DynamoDB, MySQL, MongoDB, Metasploit</span>
+          <div class="percent"></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <p><strong>Developer Tools</strong></p>
+        <div class="bar">
+          <span>AWS, Postgres, Git/GitHub, Tableau, PowerBI, Wireshark</span>
+          <div class="percent"></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <p><strong>Libraries</strong></p>
+        <div class="bar">
+          <span>NumPy, Matplotlib, Pandas, PyTorch</span>
+          <div class="percent"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Flip on Click -->
+  <script>
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('clicked');
+      });
+    });
+  </script>
+</body>
+</html>
