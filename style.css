@@ -371,7 +371,6 @@ body {
   padding: 40px;
 }
 
-
 /* Project Grid */
 .project-grid {
   display: grid;
@@ -423,7 +422,6 @@ body {
   opacity: 1;
 }
 
-
 .card-front h3 {
   margin: 0 0 10px;
   font-size: 1.2em;
@@ -434,12 +432,35 @@ body {
   font-size: 0.9em;
   line-height: 1.4;
 }
+
+/* Button styles for project cards */
+.project-button-container {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.project-button {
+  background-color: #6b4c9a;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.project-button:hover {
+  background-color: #593a84;
+}
+
+/* Filter Buttons */
 .filters {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 40px auto 30px; /* <-- Add top margin */
+  margin: 40px auto 30px;
 }
 
 .filters button {
@@ -450,13 +471,9 @@ body {
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
-
-  /* Remove default button styles */
   outline: none;
   box-shadow: none;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 /* Contact page */
@@ -486,13 +503,6 @@ body {
 
 .icon-link i:hover {
   color: white;
-}
-
-body {
-  margin: 0;
-  background-color: #2a002b;
-  color: #fff;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 header {
@@ -528,8 +538,8 @@ nav a:hover {
 .connect-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;  /* horizontally center */
-  justify-content: center;  /* vertically center if needed */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   margin-top: 100px;
 }
@@ -544,9 +554,8 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: center; /* center the contact-item blocks */
+  align-items: center;
 }
-
 
 .contact-item {
   display: flex;
@@ -616,5 +625,3 @@ nav a:hover {
   color: #ffffff;
   transform: scale(1.2);
 }
-
-
