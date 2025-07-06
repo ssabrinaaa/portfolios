@@ -440,18 +440,18 @@ body {
 }
 
 .project-button {
-  background-color: #6b4c9a;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: background-color 0.3s ease;
+  background-color: #6b4c9a !important; 
+  color: white !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  display: inline-block !important;
+  transition: background-color 0.3s ease !important;
 }
 
 .project-button:hover {
-  background-color: #593a84;
+  background-color: #593a84 !important;
 }
 
 /* Filter Buttons */
