@@ -42,7 +42,27 @@
     .navbar{display:flex; gap:clamp(12px,2.2vw,28px); align-items:center; flex-wrap:wrap}
   .navbar a{color:var(--muted); text-decoration:none; font-weight:600; font-size:clamp(13px,1.6vw,15px); transition: color .18s ease, text-shadow .22s ease}
   .navbar a:hover{ color: #fff; text-decoration:none; text-shadow: var(--nav-glow) }
-    @media (max-width:640px){.navbar{display:none}}
+    /* Mobile Menu */
+    .nav-toggle{
+      display:none
+    }
+    @media (max-width:640px){
+      .nav-toggle{
+        display:inline-flex; align-items:center; justify-content:center;
+        width:40px; height:40px; font-size:22px; color:var(--text);
+        background:#ffffff14; border:1px solid var(--panel-border);
+        border-radius:10px; cursor:pointer;
+      }
+      .navbar{
+        display:none;
+        position:absolute; top:var(--header-h); left:0; right:0;
+        background:#0b0010e6; border-bottom:1px solid #ffffff1a;
+        padding:12px 16px; gap:12px; flex-direction:column;
+      }
+      .navbar.open{display:flex}
+      .navbar a{padding:10px; border-radius:8px}
+      .navbar a:active{background:#ffffff14}
+    }
 
     /* Section */
     h2{
@@ -90,15 +110,16 @@
   <!-- Header -->
   <header class="main-header">
     <div class="container">
-      <div class="logo">
-        <a href="index.html" class="navbar-link"><h1>Sabrina Mohammed</h1></a>
+      <div class="logo"><a href="index.html" class="navbar-link"><h1>Sabrina Mohammed</h1></a></div>
+      <div class="menu-wrapper">
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="navbar">
+          <a href="about.html">About</a>
+          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </nav>
       </div>
-      <nav class="navbar">
-        <a href="about.html">About</a>
-        <a href="work.html">Work</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </nav>
     </div>
   </header>
 
@@ -131,5 +152,34 @@
       </div>
     </section>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.navbar');
+      
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          nav.classList.toggle('open');
+          toggle.textContent = nav.classList.contains('open') ? '×' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!toggle.contains(e.target) && !nav.contains(e.target) && nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            toggle.textContent = '☰';
+          }
+        });
+
+        // Close menu when clicking a link
+        nav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            toggle.textContent = '☰';
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

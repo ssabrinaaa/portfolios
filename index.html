@@ -14,7 +14,7 @@
       --shadow:0 20px 50px #00000030 inset, 0 10px 40px #00000040;
       --nav-glow: 0 6px 20px rgba(180,142,233,0.55);
       --maxw:1150px;
-      --header-h:72px; /* sticky header height (approx) */
+      --header-h:72px;
     }
 
     *{box-sizing:border-box}
@@ -29,6 +29,7 @@
       background-attachment:fixed;
       overflow-x:hidden;
     }
+
     .container{max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,32px)}
 
     /* Header */
@@ -44,85 +45,99 @@
     }
     .logo h1{margin:0; font:700 clamp(18px,2.2vw,26px) "Playfair Display",serif; letter-spacing:.3px}
     .logo .navbar-link{color:inherit; text-decoration:none}
-    .navbar{display:flex; gap:clamp(12px,2.2vw,28px); align-items:center; flex-wrap:wrap}
-  .navbar a{color:var(--muted); text-decoration:none; font-weight:600; font-size:clamp(13px,1.6vw,15px); transition: color .18s ease, text-shadow .22s ease}
-  .navbar a:hover{ color: #fff; text-decoration:none; text-shadow: var(--nav-glow) }
-    @media (max-width:640px){.navbar{display:none}}
 
-      /* ===== Full-screen Hero ===== */
+    .navbar{
+      display:flex; gap:clamp(12px,2.2vw,28px);
+      align-items:center; flex-wrap:wrap;
+    }
+    .navbar a{
+      color:var(--muted); text-decoration:none;
+      font-weight:600; font-size:clamp(13px,1.6vw,15px);
+      transition: color .18s ease, text-shadow .22s ease;
+    }
+    .navbar a:hover{
+      color:#fff; text-shadow:var(--nav-glow);
+    }
+
+    /* Mobile Menu */
+    .nav-toggle{display:none}
+
+    @media (max-width:640px){
+      .nav-toggle{
+        display:inline-flex; align-items:center; justify-content:center;
+        width:40px; height:40px; font-size:22px; color:var(--text);
+        background:#ffffff14; border:1px solid var(--panel-border);
+        border-radius:10px; cursor:pointer;
+      }
+      .navbar{
+        display:none;
+        position:absolute; top:var(--header-h); left:0; right:0;
+        background:#0b0010e6; border-bottom:1px solid #ffffff1a;
+        padding:12px 16px; gap:12px; flex-direction:column;
+      }
+      .navbar.open{display:flex}
+      .navbar a{padding:10px; border-radius:8px;}
+      .navbar a:active{background:#ffffff14}
+    }
+
+    /* ===== Hero ===== */
     .intro{
-    min-height: calc(100vh - var(--header-h));
-    margin: clamp(8px, 2vh, 16px) 0;
-    padding: clamp(20px, 5vw, 56px);
-    background: linear-gradient(180deg, #ffffff10 0%, #ffffff06 100%);
-    border: 1px solid var(--panel-border);
-    border-radius: clamp(22px, 5vw, 48px);
-    box-shadow: var(--shadow);
-
-    display: grid;
-    grid-template-columns: minmax(220px, 320px) 1fr; /* larger portrait like home */
-    gap: clamp(16px, 4vw, 40px);
-    align-items: center;
-    justify-items: start;
+      min-height: calc(100vh - var(--header-h));
+      margin: clamp(8px, 2vh, 16px) 0;
+      padding: clamp(20px, 5vw, 56px);
+      background: linear-gradient(180deg, #ffffff10 0%, #ffffff06 100%);
+      border: 1px solid var(--panel-border);
+      border-radius: clamp(22px, 5vw, 48px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(220px, 320px) 1fr;
+      gap: clamp(16px, 4vw, 40px);
+      align-items: center;
+      justify-items: start;
     }
-  
     .photo{
-    width: 100%;
-    max-width: 360px;                /* was ~240px via minmax upper bound */
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 28px;
-    border: 2px solid var(--panel-border);
-    box-shadow: 0 16px 40px #00000055;
+      width:100%; max-width:360px;
+      aspect-ratio:1/1; object-fit:cover;
+      border-radius:28px; border:2px solid var(--panel-border);
+      box-shadow:0 16px 40px #00000055;
     }
-    @media (max-width: 920px){
-  .intro{
-    grid-template-columns: 1fr;
-    text-align: center;
-    justify-items: center;
-  }
-  .photo{
-    max-width: 300px;              /* was 240px */
-    border-radius: 50%;
-    margin: 0 auto;
-  }
-  }
+    @media (max-width:920px){
+      .intro{
+        grid-template-columns:1fr; text-align:center; justify-items:center;
+      }
+      .photo{max-width:300px; border-radius:50%; margin:0 auto;}
+    }
     .bio{
       margin:0; color:#efeaff;
-      font-size: clamp(18px, 2.3vw, 28px);
-      line-height:1.6; max-width: 65ch;
+      font-size:clamp(18px,2.3vw,28px);
+      line-height:1.6; max-width:65ch;
     }
 
-    /* scroll cue */
+    /* Scroll cue */
     .scroll-cue{
       display:flex; align-items:center; gap:10px;
-      color:#efeaffcc; font-size:14px; margin-top: clamp(16px, 3vw, 28px);
+      color:#efeaffcc; font-size:14px; margin-top:clamp(16px,3vw,28px);
     }
-    .mouse{width:22px; height:34px; border-radius:18px; border:2px solid #ffffffcc; position:relative}
+    .mouse{
+      width:22px; height:34px; border-radius:18px;
+      border:2px solid #ffffffcc; position:relative;
+    }
     .mouse::after{
       content:""; position:absolute; left:50%; top:7px; transform:translateX(-50%);
       width:3px; height:7px; border-radius:2px; background:#ffffffcc;
       animation: wheel 1.6s ease-in-out infinite;
     }
     @keyframes wheel{
-      0%{opacity:0; transform:translate(-50%, 0)}
+      0%{opacity:0; transform:translate(-50%,0)}
       30%{opacity:1}
-      100%{opacity:0; transform:translate(-50%, 10px)}
+      100%{opacity:0; transform:translate(-50%,10px)}
     }
 
-    @media (max-width: 920px){
-      .intro{ grid-template-columns: 1fr; text-align:center; justify-items:center }
-      .photo{ margin:0 auto; border-radius:50%; max-width:240px }
-      .scroll-cue{ justify-content:center }
-    }
-
-    /* Section Titles */
     h2{
       font:700 clamp(20px,2.6vw,28px) "Playfair Display",serif;
-      margin:clamp(18px,4vw,28px) 0 10px; color:#fff
+      margin:clamp(18px,4vw,28px) 0 10px; color:#fff;
     }
 
-    /* Grid */
     .grid{
       display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
       gap:clamp(12px,2.4vw,22px); margin-bottom:clamp(18px,4vw,32px);
@@ -134,7 +149,7 @@
     .flip-card{position:relative; cursor:pointer; perspective:1000px}
     .flip-inner{
       position:relative; width:100%; height:100%; min-height:160px;
-      transform-style:preserve-3d; transition:transform .6s; will-change:transform;
+      transform-style:preserve-3d; transition:transform .6s;
     }
     @media (hover:hover){ .flip-card:hover .flip-inner{transform:rotateY(180deg)} }
     .flip-card.clicked .flip-inner{transform:rotateY(180deg)}
@@ -142,11 +157,11 @@
     .flip-front,.flip-back{
       position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
       padding:18px; border-radius:20px; box-shadow:var(--shadow);
-      -webkit-backface-visibility:hidden; backface-visibility:hidden;
+      backface-visibility:hidden;
       font-weight:600; line-height:1.4;
     }
-    .flip-front{transform:rotateY(0); color:#fff}
-    .flip-back{transform:rotateY(180deg); color:#f7f0ff; background:#ffffff08}
+    .flip-front{color:#fff}
+    .flip-back{color:#f7f0ff; background:#ffffff08; transform:rotateY(180deg)}
 
     .aiga-bg{background:linear-gradient(135deg,#7b2ab3,#b48ee9)}
     .adobe-bg{background:linear-gradient(135deg,#6a28a5,#b48ee9)}
@@ -154,24 +169,33 @@
     .colorstack-bg{background:linear-gradient(135deg,#551c84,#9c6edd)}
     .nsbe-bg{background:linear-gradient(135deg,#4a1676,#945fdb)}
 
-    /* Skills */
     .skill-block{margin:14px 0 18px}
     .skill-block p{margin:0 0 8px; color:#fff; font-weight:700}
-    .bar{position:relative; background:#ffffff14; border:1px solid var(--panel-border); border-radius:12px; padding:12px 14px; overflow:hidden}
+    .bar{
+      position:relative; background:#ffffff14; border:1px solid var(--panel-border);
+      border-radius:12px; padding:12px 14px; overflow:hidden;
+    }
     .bar span{display:block; color:#efeaff; font-size:clamp(13px,1.8vw,15px)}
-    .bar .percent{position:absolute; left:0; top:0; bottom:0; width:55%; background:linear-gradient(90deg,#cfc2ff25,#ffffff10); border-radius:12px; pointer-events:none}
-
+    .bar .percent{
+      position:absolute; left:0; top:0; bottom:0; width:55%;
+      background:linear-gradient(90deg,#cfc2ff25,#ffffff10);
+      border-radius:12px; pointer-events:none;
+    }
     a{color:#efe6ff} a:hover{color:#fff}
     html{scroll-behavior:smooth}
   </style>
 </head>
+
 <body>
   <header class="main-header">
     <div class="container">
       <div class="logo">
         <a href="index.html" class="navbar-link"><h1>Sabrina Mohammed</h1></a>
       </div>
-      <nav class="navbar">
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <nav class="navbar" id="site-nav">
         <a href="about.html">About</a>
         <a href="work.html">Work</a>
         <a href="projects.html">Projects</a>
@@ -181,7 +205,6 @@
   </header>
 
   <div class="container">
-    <!-- FULL SCREEN HERO -->
     <section class="intro" id="home">
       <img src="psticker.webp" alt="Sabrina Photo" class="photo" />
       <div>
@@ -194,7 +217,6 @@
       </div>
     </section>
 
-    <!-- Leadership and Activities -->
     <section>
       <h2>Leadership and Activities</h2>
       <div class="grid">
@@ -235,7 +257,6 @@
       </div>
     </section>
 
-    <!-- Technical Skills -->
     <section>
       <h2>Technical Skills</h2>
       <div class="skill-block">
@@ -258,7 +279,7 @@
   </div>
 
   <script>
-    // Click/tap to flip (for touch devices)
+    // Flip cards for touch devices
     document.addEventListener('click', (e) => {
       const card = e.target.closest('.flip-card');
       if (card) card.classList.toggle('clicked');
@@ -275,6 +296,22 @@
         }
       });
     });
+
+    // Mobile menu toggle
+    const toggleBtn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('site-nav');
+    if (toggleBtn && nav){
+      toggleBtn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', String(open));
+      });
+      nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          nav.classList.remove('open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
   </script>
 </body>
 </html>

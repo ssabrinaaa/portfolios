@@ -5,6 +5,7 @@
   <title>About | Sabrina Mohammed</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root{
       --bg1:#230024; --bg2:#3a0052; --bg3:#6a28a5; --bg4:#b48ee9;
@@ -14,6 +15,7 @@
       --nav-glow: 0 6px 20px rgba(180,142,233,0.55);
       --maxw:1150px; --header-h:72px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -26,24 +28,56 @@
       background-attachment:fixed;
       overflow-x:hidden;
     }
-    .container{max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,32px)}
+
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 200px}
     a{color:#efe6ff} a:hover{color:#fff}
 
     /* Header */
     .main-header{
       position:sticky; top:0; z-index:20; height:var(--header-h);
-      display:flex; align-items:center;
       background:#0b001033; border-bottom:1px solid #ffffff1a; backdrop-filter:blur(6px);
     }
-    .main-header .container{display:flex; align-items:center; justify-content:space-between; width:100%}
+    .main-header .container{
+      display:flex; align-items:center; justify-content:space-between; width:100%;
+      height:100%;
+    }
     .logo h1{margin:0; font:700 clamp(18px,2.2vw,26px) "Playfair Display",serif}
     .logo .navbar-link{color:inherit; text-decoration:none}
-    .navbar{display:flex; gap:clamp(12px,2.2vw,28px); align-items:center; flex-wrap:wrap}
-  .navbar a{color:var(--muted); text-decoration:none; font-weight:600; font-size:clamp(13px,1.6vw,15px); transition: color .18s ease, text-shadow .22s ease}
-  .navbar a:hover{ color: #fff; text-decoration:none; text-shadow: var(--nav-glow) }
-    @media (max-width:640px){.navbar{display:none}}
+    .navbar{
+      display:flex; gap:clamp(12px,2.2vw,28px);
+      align-items:center; flex-wrap:wrap;
+    }
+    .navbar a{
+      color:var(--muted); text-decoration:none;
+      font-weight:600; font-size:clamp(13px,1.6vw,15px);
+      transition: color .18s ease, text-shadow .22s ease;
+    }
+    .navbar a:hover{
+      color:#fff; text-shadow:var(--nav-glow);
+    }
 
-    
+    /* Mobile Menu */
+    .nav-toggle{display:none}
+
+    @media (max-width:640px){
+      .nav-toggle{
+        display:inline-flex; align-items:center; justify-content:center;
+        width:40px; height:40px; font-size:22px; color:var(--text);
+        background:#ffffff14; border:1px solid var(--panel-border);
+        border-radius:10px; cursor:pointer;
+      }
+      .navbar{
+        display:none;
+        position:absolute; top:var(--header-h); left:0; right:0;
+        background:#0b0010e6; border-bottom:1px solid #ffffff1a;
+        padding:12px 16px; gap:12px; flex-direction:column;
+      }
+      .navbar.open{display:flex}
+      .navbar a{padding:10px; border-radius:8px;}
+      .navbar a:active{background:#ffffff14}
+    }
+
+    /* ===== HERO SECTION ===== */
     .about-hero{
       min-height: calc(100vh - var(--header-h));
       margin: clamp(8px, 2vh, 16px) 0;
@@ -52,15 +86,15 @@
       border: 1px solid var(--panel-border);
       border-radius: clamp(22px, 5vw, 48px);
       box-shadow: var(--shadow);
-
       display: grid;
-      grid-template-columns: minmax(220px, 320px) 1fr; 
+      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
       gap: clamp(16px, 4vw, 40px);
       align-items: center;
-      justify-items: start;
+      justify-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
-    /* framed portrait block */
     .photo-frame{
       width:100%;
       padding:18px;
@@ -86,12 +120,11 @@
       max-width: 65ch;
     }
 
-    /* chip + scroll cue under the paragraph (right column) */
     .chips-scroll{display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top: clamp(14px,2.4vw,22px)}
     .fact{
       background:#ffffff14; border:1px solid var(--panel-border);
       border-radius:18px; padding:12px 16px; text-align:center;
-      box-shadow: var(--shadow); font-weight:700; color:#fff
+      box-shadow: var(--shadow); font-weight:700; color:#fff;
     }
     .scroll-cue{display:flex; align-items:center; gap:10px; color:#e8e0ff; opacity:.95}
     .mouse{width:22px; height:34px; border-radius:18px; border:2px solid #ffffffcc; position:relative}
@@ -106,7 +139,6 @@
       100%{opacity:0; transform:translate(-50%, 10px)}
     }
 
-    /* mobile match */
     @media (max-width:920px){
       .about-hero{ grid-template-columns:1fr; text-align:center; justify-items:center }
       .photo-frame{ max-width:300px }
@@ -137,20 +169,15 @@
       background: linear-gradient(135deg, #7b2ab34d, #b48ee94d);
       box-shadow: inset 0 0 0 1px #ffffff25, 0 10px 30px #00000033;
     }
-   /* images: cover by default and center the focal point */
-   .bubble img{ width:100%; height:100%; object-fit:cover; object-position:center center; display:block; border-radius:24px }
-   /* helper classes for per-image focal control */
-   .focus-top{ object-position: top center }
-   .focus-bottom{ object-position: bottom center }
-   .focus-left{ object-position: center left }
-   .focus-right{ object-position: center right }
+    .bubble img{ width:100%; height:100%; object-fit:cover; object-position:center; border-radius:24px }
     .about-row.reverse .bubble{order:-1}
     @media (max-width:900px){
-      .about-row, .about-row.reverse{grid-template-columns:1fr; }
+      .about-row, .about-row.reverse{grid-template-columns:1fr;}
       .about-row.reverse .bubble{order:2}
     }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header class="main-header">
@@ -158,7 +185,10 @@
       <div class="logo">
         <a href="index.html" class="navbar-link"><h1>Sabrina Mohammed</h1></a>
       </div>
-      <nav class="navbar">
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <nav class="navbar" id="site-nav">
         <a href="about.html">About</a>
         <a href="work.html">Work</a>
         <a href="projects.html">Projects</a>
@@ -174,11 +204,10 @@
     <div>
       <h1>About Me</h1>
       <p class="lead">
-        My name is Sabrina Mohammed, I am a senior studying Computer Information Technology and Graphic Design student at Minnesota State University, Mankato.
+        My name is Sabrina Mohammed, I am a senior studying Computer Information Technology and Graphic Design at Minnesota State University, Mankato.
         I’m inspired to pursue a path in cloud technology where I can design solutions that benefit others. Whether through code, design, or strategy,
         I’m driven by the idea of creating tools that are thoughtful, efficient, and impactful.
       </p>
-
       <div class="chips-scroll">
         <div class="fact">Cloud + Data + Design</div>
         <div class="scroll-cue" aria-hidden="true">
@@ -200,7 +229,7 @@
           to fix real-world problems. I began my journey as a full-stack developer, building cloud-based solutions to streamline clinic operations.
         </p>
       </div>
-    <div class="bubble" aria-hidden="true"><img src="baby.png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="baby.png" alt="childhood creativity"></div>
     </div>
 
     <div class="about-row reverse">
@@ -212,49 +241,66 @@
           that work just as beautifully as they look.
         </p>
       </div>
-  <div class="bubble" aria-hidden="true"><img src="ux_ui.png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="ux_ui.png" alt="UX design"></div>
     </div>
 
     <div class="about-row">
       <div class="about-card">
         <p><em>My plot twist? I didn’t leave tech — I elevated it with design.</em></p>
       </div>
-    <div class="bubble" aria-hidden="true"><img src="tech_savy .png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="tech_savy.png" alt="Tech and design"></div>
     </div>
 
     <div class="about-row reverse">
       <div class="about-card">
         <p>
           I’m actively involved in communities that support diversity, creativity, and technical growth.
-          As Technical Director for ColorStack MNSU, I help lead initiatives that empower underrepresented students in tech through workshops and events.
-          I served as a Senator for the National Society of Black Engineers, where I supported outreach and community-building efforts.
-          I’m also a member of AIGA, where I explore the intersection of design and technology.
-          Currently, I’m expanding my technical foundation as a CodePath Intermediate Cybersecurity Fellow, gaining hands-on experience in areas like
-          threat detection, network security, and ethical hacking.
+          As Technical Director for ColorStack MNSU, I help lead initiatives that empower underrepresented students in tech.
+          I served as a Senator for the National Society of Black Engineers, where I supported outreach and community-building.
+          I’m also part of AIGA, exploring how design and technology intersect.
+          Currently, I’m expanding my technical foundation as a CodePath Cybersecurity Fellow, learning about threat detection,
+          network security, and ethical hacking.
         </p>
       </div>
-  <div class="bubble" aria-hidden="true"><img src="volunteer.png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="volunteer.png" alt="Community involvement"></div>
     </div>
 
     <div class="about-row">
       <div class="about-card">
         <p><em>When I’m not working…</em></p>
       </div>
-  <div class="bubble" aria-hidden="true"><img src="hobby.png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="hobby.png" alt="Hobbies"></div>
     </div>
 
     <div class="about-row reverse">
       <div class="about-card">
         <p>
-          Outside of tech, I love expressing myself through creativity—sketching, painting, and more recently, exploring candle-making.
-          I’m always eager to learn, and that curiosity fuels many of my hobbies and side projects.
-          From hands-on crafts to digital design, I enjoy experimenting across different mediums.
-          In the coming years, I hope to continue growing by learning from diverse communities and blending my passions in ways that bring
-          both creativity and meaning into my work.
+          Outside of tech, I love expressing myself through creativity—sketching, painting, and more recently, candle-making.
+          I’m always eager to learn, and that curiosity fuels many of my hobbies and projects.
+          From crafts to digital design, I enjoy experimenting across mediums.
+          In the coming years, I hope to keep growing and blending my passions to bring both creativity and purpose into my work.
         </p>
       </div>
-  <div class="bubble" aria-hidden="true"><img src="drawing.png" alt="placeholder image"/></div>
+      <div class="bubble" aria-hidden="true"><img src="drawing.png" alt="Creative art"></div>
     </div>
   </main>
+
+  <script>
+    // Mobile menu toggle
+    const toggleBtn = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('site-nav');
+    if (toggleBtn && nav){
+      toggleBtn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', String(open));
+      });
+      nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          nav.classList.remove('open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 </body>
 </html>

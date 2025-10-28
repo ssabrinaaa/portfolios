@@ -36,10 +36,74 @@
     .main-header .container{display:flex; align-items:center; justify-content:space-between; width:100%}
     .logo h1{margin:0; font:700 clamp(18px,2.2vw,26px) "Playfair Display",serif}
     .logo .navbar-link{color:inherit; text-decoration:none}
-    .navbar{display:flex; gap:clamp(12px,2.2vw,28px); align-items:center}
-  .navbar a{color:var(--muted); text-decoration:none; font-weight:600; font-size:clamp(13px,1.6vw,15px); transition: color .18s ease, text-shadow .22s ease}
-  .navbar a:hover{ color: #fff; text-decoration:none; text-shadow: var(--nav-glow) }
-    @media (max-width:640px){.navbar{display:none}}
+    .menu-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .navbar{
+      display:flex; 
+      gap:clamp(12px,2.2vw,28px); 
+      align-items:center
+    }
+    .navbar a{
+      color:var(--muted); 
+      text-decoration:none; 
+      font-weight:600; 
+      font-size:clamp(13px,1.6vw,15px); 
+      transition: color .18s ease, text-shadow .22s ease
+    }
+    .navbar a:hover{ 
+      color: #fff; 
+      text-decoration:none; 
+      text-shadow: var(--nav-glow) 
+    }
+    /* Mobile Menu */
+    .nav-toggle{
+      display: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 24px;
+      color: var(--text);
+    }
+    @media (max-width:640px){
+      .nav-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:40px;
+        height:40px;
+        background:#ffffff14;
+        border:1px solid var(--panel-border);
+        border-radius:10px;
+      }
+      .navbar{
+        display:none;
+        position:fixed;
+        top:var(--header-h);
+        left:0;
+        right:0;
+        background:#0b0010f6;
+        border-bottom:1px solid var(--panel-border);
+        padding:12px 16px;
+        flex-direction:column;
+        gap:8px;
+      }
+      .navbar.open{
+        display:flex;
+      }
+      .navbar a{
+        padding:12px;
+        border-radius:8px;
+        width:100%;
+        text-align:center;
+      }
+      .navbar a:hover{
+        background:#ffffff14;
+      }
+    }
 
     /* Tagline */
     .project-tagline{font:700 clamp(26px,5vw,48px) "Playfair Display",serif; line-height:1.05; margin: clamp(18px,4vw,28px) 0}
@@ -66,8 +130,8 @@
       border:1px solid var(--panel-border);
       border-radius:var(--card-radius);
       overflow:hidden;
-  background: var(--card-color);
-  box-shadow: inset 0 60px 80px rgba(0,0,0,0.15), 0 10px 40px rgba(0,0,0,0.35);
+      background: var(--card-color);
+      box-shadow: inset 0 60px 80px rgba(0,0,0,0.15), 0 10px 40px rgba(0,0,0,0.35);
 
       transform-style:preserve-3d;
       -webkit-transform-style:preserve-3d;
@@ -79,11 +143,9 @@
 
     .card-face{
       position:absolute; inset:0; padding:20px;
-      /* keep backface hidden for the face itself; avoid forcing it on every descendant */
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       transition:opacity .25s ease, visibility .25s ease;
-      /* promote to its own 3D layer to avoid compositing issues */
       transform: translateZ(0);
       display:flex;
       flex-direction:column;
@@ -166,12 +228,15 @@
   <header class="main-header">
     <div class="container">
       <div class="logo"><a href="index.html" class="navbar-link"><h1>Sabrina Mohammed</h1></a></div>
-      <nav class="navbar">
-        <a href="about.html">About</a>
-        <a href="work.html">Work</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <div class="menu-wrapper">
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="navbar">
+          <a href="about.html">About</a>
+          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -379,6 +444,35 @@
           card.classList.toggle('flipped');
         }
       });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.navbar');
+      
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          nav.classList.toggle('open');
+          toggle.textContent = nav.classList.contains('open') ? '×' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!toggle.contains(e.target) && !nav.contains(e.target) && nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            toggle.textContent = '☰';
+          }
+        });
+
+        // Close menu when clicking a link
+        nav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            toggle.textContent = '☰';
+          });
+        });
+      }
     });
   </script>
 </body>
